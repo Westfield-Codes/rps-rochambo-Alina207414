@@ -31,5 +31,9 @@ function cpuTurn(){
 }
 
 function findWinner(){
-    return "I";
+    let combo = u + c;
+    match = "";
+    winner = "";
+    let winArray [["r","p","I"],["r","s","You"],["p","s","I"],["p","r","You"],[][]]
+    return winner;
 }
