@@ -8,3 +8,32 @@
 *     d. Move to next function
 *  3. System Test finished version (does it work right in all conditions?)
 */
+
+function main(){
+    let u = "";
+    let c = "";
+    while (u == c){
+    u = userTurn();
+    c = cpuTurn();
+    if (u == c) alert("We both chose " + c);
+}
+    let winner = findWinner(u,c);
+    alert("you chose " + u + " and i chose " + c + " so " + winner + " won!");
+}
+
+function userTurn(){
+    return "r";
+}
+
+
+function cpuTurn(){
+    return "p";
+}
+
+function findWinner(){
+    let combo = u + c;
+    match = "";
+    winner = "";
+    let winArray [["r","p","I"],["r","s","You"],["p","s","I"],["p","r","You"],[][]]
+    return winner;
+}
