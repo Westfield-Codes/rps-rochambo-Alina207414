@@ -10,6 +10,26 @@
 */
 
 function main(){
+    let winner = "";
+    let rounds = setRounds
+}
+
+
+function setRounds(){
+ let rounds = prompt("Number of rouns?");
+ if (rounds % 2 == 0) {
+    alert("must be odd try again");
+    return setRounds();
+ }
+    let round = 1;
+}
+
+/*RPS Rounds
+*plays a round of RPS and tells the winner
+* @param: none
+* @ Return: none
+*/
+function rpsRound(){
     let u = "";
     let c = "";
     while (u == c){
@@ -21,22 +41,34 @@ function main(){
     alert("you chose " + u + " and i chose " + c + " so " + winner + " won!");
 }
 
+
+/* userTurn
+user can chose r, p, or s. If bad Input, give new choice.
+* @param: none
+* @return: choice
+*/
 function userTurn(){
     let choice = prompt("enter r, p, or s");
     const letters = ["r","p","s"];
     if (!letters.includes(choice)){
             alert("invalid input");
+        
     }
     return userTurn;
 }
 
-
+/* cpuTurn chose a random number 0-2,returns the associated RPS  move.
+* @param: none
+* @return: choise
+*/
 function cpuTurn(){
     let choice = Math.floor(Math.random()*3);
     let moves = ["r","p","s"];
     return moves[choice];
 }
 
+/* findwinner
+*/
 function findWinner(){
     let combo = u + c;
     let match = "";
