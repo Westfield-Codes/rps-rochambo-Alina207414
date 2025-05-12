@@ -22,18 +22,31 @@ function main(){
 }
 
 function userTurn(){
-    return "r";
+    let choice = prompt("enter r, p, or s");
+    const letters = ["r","p","s"];
+    if (!letters.includes(choice)){
+            alert("invalid input");
+    }
+    return userTurn;
 }
 
 
 function cpuTurn(){
-    return "p";
+    let choice = Math.floor(Math.random()*3);
+    let moves = ["r","p","s"];
+    return moves[choice];
 }
 
 function findWinner(){
     let combo = u + c;
-    match = "";
-    winner = "";
-    let winArray ["r","p","I"],["r","s","You"],["p","s","I"],["p","r","You"],
+    let match = "";
+    let winner = "";
+    let winArray = [["r","p","I"],["r","s","You"],["s","r","I"],["p","r","You"],["p","s","I"],["s","p","you"]];
+    for ( i = 0; i < winArray.length; i++){
+        match = winArray[i][0] + winArray[i][1];
+        if (match==combo){
+            winner = winarray[i][2];
+        }
+    }
     return winner;
 }
