@@ -9,9 +9,18 @@
 *  3. System Test finished version (does it work right in all conditions?)
 */
 
+
+let score = [0,0];
+
+
 function main(){
     let winner = "";
-    let rounds = setRounds
+    let rounds = setRounds();
+     for (let round = 1; round <= rounds; round++) {
+        winner = rpsRound();
+        score[winner]++;
+     }
+     alert("you have " + score[0] + " and I have " + score[1]);
 }
 
 
@@ -21,24 +30,28 @@ function setRounds(){
     alert("must be odd try again");
     return setRounds();
  }
-    let round = 1;
+    return rounds;
 }
 
 /*RPS Rounds
-*plays a round of RPS and tells the winner
+*plays a round of RPS and tells the winner. 
+*Returns the index (0,1) in score for the winner
 * @param: none
-* @ Return: none
+* @ Return:winner
 */
 function rpsRound(){
     let u = "";
     let c = "";
     while (u == c){
-    u = userTurn();
-    c = cpuTurn();
-    if (u == c) alert("We both chose " + c);
-}
+        u = userTurn();
+        c = cpuTurn();
+        if (u == c) alert("We both chose " + c);
+    }
     let winner = findWinner(u,c);
     alert("you chose " + u + " and i chose " + c + " so " + winner + " won!");
+   let winValues = ["you","I"];
+   winner = winValues.indexOf(winner);
+    return winner;
 }
 
 
@@ -52,9 +65,9 @@ function userTurn(){
     const letters = ["r","p","s"];
     if (!letters.includes(choice)){
             alert("invalid input");
-        
+         return userTurn();
     }
-    return userTurn;
+    return choice;
 }
 
 /* cpuTurn chose a random number 0-2,returns the associated RPS  move.
@@ -68,8 +81,13 @@ function cpuTurn(){
 }
 
 /* findwinner
+* Takes user and computerns turn
+* Decides who is winner is 
+* Return winner
+* @param: u,c
+* @return: winner
 */
-function findWinner(){
+function findWinner(u,c){
     let combo = u + c;
     let match = "";
     let winner = "";
@@ -77,7 +95,7 @@ function findWinner(){
     for ( i = 0; i < winArray.length; i++){
         match = winArray[i][0] + winArray[i][1];
         if (match==combo){
-            winner = winarray[i][2];
+            winner = winArray[i][2];
         }
     }
     return winner;
