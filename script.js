@@ -19,84 +19,91 @@ function main(){
      for (let round = 1; round <= rounds; round++) {
         winner = rpsRound();
         score[winner]++;
+        if (score[0] > rounds/2 || score[1] > rounds/2) round = rounds;
      }
-     alert("you have " + score[0] + " and I have " + score[1]);
+     let gameWinner = "I";
+     if (score[0] > score[1]) gameWinner = "you";
+     alert("you have " + score[0] + " and I have " + score[1] + " so " + gameWinner + " wom.");
 }
 
 
-function setRounds(){
- let rounds = prompt("Number of rouns?");
- if (rounds % 2 == 0) {
-    alert("must be odd try again");
+function setRounds() {
+   let rounds = prompt("Number of rounds?");
+   if (rounds % 2 == 0) {
+    alert("must be odd, try again");
     return setRounds();
- }
-    return rounds;
+   }
+   return rounds;
 }
 
-/*RPS Rounds
-*plays a round of RPS and tells the winner. 
-*Returns the index (0,1) in score for the winner
-* @param: none
-* @ Return:winner
-*/
-function rpsRound(){
+/* RPS Round
+ * Plays a round of RPS and tells the winner ("I" or "You") won.
+ * Returns the index (0,1) in score for the winner.
+ * @param: none
+ * @return: winner (0 or 1)
+ */
+function rpsRound() {
     let u = "";
-    let c = "";
-    while (u == c){
+    let c ="";
+    while (u == c) {
         u = userTurn();
         c = cpuTurn();
-        if (u == c) alert("We both chose " + c);
-    }
-    let winner = findWinner(u,c);
-    alert("you chose " + u + " and i chose " + c + " so " + winner + " won!");
-   let winValues = ["you","I"];
-   winner = winValues.indexOf(winner);
-    return winner;
+        if (u ==c) {
+            alert("We both chose "  + c);
+        }
+  }
+  winner = findWinner(u,c);
+  let winValues = ["You", "I"];
+  winnerWord = winValues[winner];
+  alert("You chose " + u + " and I chose "+ c  +  " so " + winnerWord  +  " won!"); 
+  return winner; 
 }
 
-
-/* userTurn
-user can chose r, p, or s. If bad Input, give new choice.
-* @param: none
-* @return: choice
-*/
-function userTurn(){
+/* userturn
+ * user can choose r, p, or s.
+ * if bad Input, give new choice
+ * @param:none
+ * @return:choice
+ */
+function userTurn() {
     let choice = prompt("enter r, p, or s");
-    const letters = ["r","p","s"];
-    if (!letters.includes(choice)){
-            alert("invalid input");
-         return userTurn();
+    const turn = ["r","p","s"];
+    if (!turn.includes(choice)) {
+        alert("Invalid Input");
+        return userTurn();
     }
     return choice;
 }
 
-/* cpuTurn chose a random number 0-2,returns the associated RPS  move.
-* @param: none
-* @return: choise
-*/
-function cpuTurn(){
+/* cpuTurn
+ * computer choose between r, p, or s
+ * @param:none
+ * @return: choice
+ */
+function cpuTurn() {
     let choice = Math.floor(Math.random()*3);
     let moves = ["r","p","s"];
     return moves[choice];
 }
 
-/* findwinner
-* Takes user and computerns turn
-* Decides who is winner is 
-* Return winner
-* @param: u,c
-* @return: winner
-*/
-function findWinner(u,c){
-    let combo = u + c;
-    let match = "";
-    let winner = "";
-    let winArray = [["r","p","I"],["r","s","You"],["s","r","I"],["p","r","You"],["p","s","I"],["s","p","you"]];
-    for ( i = 0; i < winArray.length; i++){
-        match = winArray[i][0] + winArray[i][1];
-        if (match==combo){
-            winner = winArray[i][2];
-        }
+/* findWinner
+ * takes user and computer turn
+ * decides who the winner is
+ * returns winner
+ * @param:u,c
+ * @return: winner
+ */
+function findWinner(u,c) {
+  let combo = u + c;
+  let match = "";
+  let winner = "";
+  let winArray = [["r","p",0],["r","s",1],["s","r",0],["s","p",1],["p","s",0],["p","r",1]];
+  for (let i =0;i < winArray.length;i++) {
+    match = winArray[i][0]+winArray[i][1];
+    if (match == combo) {
+      winner = winArray[i][2];
+      break;
     }
-    return winner;
+  }
+  return winner;
 }
